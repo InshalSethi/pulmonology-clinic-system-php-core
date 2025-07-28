@@ -1,0 +1,153 @@
+.cardstyle {
+    position: relative;
+    margin-bottom: 24px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+}
+
+.card-topline-green {
+    border-top: 3px solid #00A65A;
+}
+
+.card-head .tools {
+    padding-right: 16px;
+    float: right;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    margin-left: 24px;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+.btn-group>.btn,
+.btn.btn-link:hover,
+.btn,
+.icon-btn,
+{
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .18);
+}
+
+.card-head:after {
+    clear: both;
+}
+
+.card-head:before,
+.card-head:after {
+    content: " ";
+    display: table;
+}
+
+[class*=" fa-"]:not(.fa-stack),
+[class*=" glyphicon-"],
+[class*=" icon-"],
+[class^=fa-]:not(.fa-stack),
+[class^=glyphicon-],
+[class^=icon-] {
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    text-decoration: none;
+}
+
+.btn>i {
+    margin-top: 0;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.card-topline-red {
+    border-top: 3px solid #DD4B39;
+}
+
+ul.docListWindow {
+    list-style-type: none;
+    padding: 0 10px;
+}
+
+ul.docListWindow li {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px dashed #dcdcdc;
+    margin-bottom: 11px;
+    padding-bottom: 11px;
+}
+
+ul.docListWindow li .prog-avatar {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 25px;
+}
+
+ul.docListWindow li .prog-avatar img {
+    width: 100%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+.card-bodystyle:last-child {
+    border-radius: 0 0 2px 2px;
+}
+
+.card-bodystyle {
+    padding: 10px 24px 24px 24px;
+    position: relative;
+}
+
+.clsAvailable {
+    color: #0cc745;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.clsNotAvailable {
+    color: #ff0000;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.clsOnLeave {
+    color: #32c5d2;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form .form-body,
+.form-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+
+/*APPOINTMENT////////////*/
+
+.card-topline-yellow {
+    border-top: 3px solid #F39C12;
+}
+
+.cardappoint {
+    position: relative;
+    margin-bottom: 24px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+}
+
+.card-headappoint {
+    border-radius: 2px 2px 0 0;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+    padding: 2px;
+    text-transform: uppercase;
+    color: #3a405b;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 40px;
+    min-height: 40px;
+}
