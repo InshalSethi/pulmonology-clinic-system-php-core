@@ -1071,17 +1071,17 @@ if ('webkitSpeechRecognition' in window) {
 
         <div class="form-group hidden" id="remove_in<?php //echo $get_in['test_id'] ?>" >
         <div class="col-md-2 setpad set_btnwid" style="margin-left:36px;">
-           <button type="button" onclick="remove_pre_inhouse('<?php echo $get_in['test_id'] ?>')" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
+           <button type="button" onclick="remove_pre_inhouse('<?php // echo $get_in['test_id'] ?>')" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
         </div>
         <div class="col-md-4 setpad">
         <input type="text" name="pre_inhouse_id[]" value="<?php // echo $get_in['test_id'] ?>" style="display:none;">
-        <input class="form-control setwid inhouse " name="pre_inhouse_test[]" id='inhouse' autocomplete="off" value="<?php// echo $get_in['test_name'] ?>" />
+        <input class="form-control setwid inhouse " name="pre_inhouse_test[]" id='inhouse' autocomplete="off" value="<?php // echo $get_in['test_name'] ?>" />
         </div>
          <div class="col-md-4 setpad">
-        <input class="form-control setwid " name="pre_inhouse_text[]" id='inhouse_text' autocomplete="off" value="<?php// echo $get_in['result_value'] ?>" />
+        <input class="form-control setwid " name="pre_inhouse_text[]" id='inhouse_text' autocomplete="off" value="<?php // echo $get_in['result_value'] ?>" />
         </div>
         <div class="col-md-2 setpad">
-        <input class="form-control setwid  " name="pre_inhouse_price[]" id='inhouse_price' autocomplete="off" value="<?php// echo $get_in['test_price'] ?>" />
+        <input class="form-control setwid  " name="pre_inhouse_price[]" id='inhouse_price' autocomplete="off" value="<?php // echo $get_in['test_price'] ?>" />
         </div>
         
          

@@ -7,7 +7,9 @@
     
     //get search term
     $searchTerm = $_GET['term'];
-    
+
+    //initialize data array
+    $data = array();
     //get matched data from skills table
     $query = $db->query("SELECT * FROM tbl_test_place WHERE place_name LIKE '%".$searchTerm."%' ORDER BY place_name ASC");
 

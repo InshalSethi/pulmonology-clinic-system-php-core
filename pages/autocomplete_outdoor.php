@@ -7,7 +7,9 @@
     
     //get search term
     $searchTerm = $_GET['term'];
-    
+
+    //initialize data array
+    $data = array();
     //get matched data from skills table
     $query = $db->query("SELECT * FROM outdoor_lab_test WHERE test_name LIKE '%".$searchTerm."%' ORDER BY test_name ASC");
 

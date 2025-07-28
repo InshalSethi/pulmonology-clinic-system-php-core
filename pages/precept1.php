@@ -602,7 +602,7 @@ function setFocusToTextBox(){
       <option value="مہینے" <?php if($p_me['time_span']=='مہینے') { echo "selected"; } ?> >مہینے</option>
       <option value="سال" <?php if($p_me['time_span']=='سال') { echo "selected"; } ?> >سال</option>
       <option value="لگاتار" <?php if($p_me['time_span']=='لگاتار') { echo "selected"; } ?> > لگاتار </option>
-     <!--<option value="زندگی بھر" <?php// if($p_me['time_span']=='زندگی بھر') { echo "selected"; } ?> >زندگی بھر</option>-->
+     <!--<option value="زندگی بھر" <?php // if($p_me['time_span']=='زندگی بھر') { echo "selected"; } ?> >زندگی بھر</option>-->
      <option value='حسب ضرورت' <?php if($p_me['time_span']=='حسب ضرورت'){ echo "selected"; } ?> >حسب ضرورت</option>
       </select>
       </div>

@@ -265,19 +265,23 @@ function push_new_urdu($med_id,$med_des,$db,$a){
 
 ///////////////////////////////////////////////////////////////////////////////
 function get_stamp_name($id_string,$db){
-     $stampp_id =explode(",",$id_string);
-         foreach ($stampp_id  as $s_id) 
-        {  
-         $db->where('st_id',$s_id);
-         $stm_id=$db->getOne('stamps');
-         $final[] =$stm_id['st_name'];
-         $final_text =implode(",", $final);
-         
-        
+    $stampp_id = explode(",",$id_string);
+    $final = array(); // Initialize the array
+
+    foreach ($stampp_id as $s_id)
+    {
+        $db->where('st_id',$s_id);
+        $stm_id = $db->getOne('stamps');
+
+        // Check if the query returned a result and the required field exists
+        if ($stm_id && isset($stm_id['st_name'])) {
+            $final[] = $stm_id['st_name'];
         }
-        
-        return $final_text;
-    
+    }
+
+    // Create the final text after the loop
+    $final_text = implode(",", $final);
+    return $final_text;
 }
 ///////////////////////////////////////////////////////////////////////////////
 function push_plan($plan_string,$db){
@@ -454,8 +458,8 @@ function push_new_impression($imp_name,$db){
 
 ///////////////////////////////////////////////////////////////////
 function sanitize_text_input($str){
-    $str=strip_tags($str); 
-   $newstr = filter_var($str, FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
+    $str=strip_tags($str);
+   $newstr = htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
     return $newstr;
 
 

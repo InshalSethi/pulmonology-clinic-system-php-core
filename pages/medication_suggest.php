@@ -7,7 +7,9 @@
     
     //get search term
     $searchTerm = $_GET['term'];
-    
+
+    //initialize data array
+    $data = array();
     //get matched data from skills table
     $query = $db->query("SELECT * FROM medication_term WHERE med_term LIKE '%".$searchTerm."%' ORDER BY med_term ASC");
     while ($row = $query->fetch_assoc()) {

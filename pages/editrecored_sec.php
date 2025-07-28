@@ -75,16 +75,17 @@ if(isset($_POST['save_recored']))
     // $pre_inhouse_text = $_POST['pre_inhouse_text'];
     // $pre_inhouse_price = $_POST['pre_inhouse_price'];
     
-    $pre_outdoor_id = $_POST['pre_outdoor_id'];
-    $pre_outdoor_test = $_POST['pre_outdoor_test'];
-    $pre_outdoor_text = $_POST['pre_outdoor_text'];
+    // Check if pre_outdoor data exists and is an array before processing
+    $pre_outdoor_id = isset($_POST['pre_outdoor_id']) && is_array($_POST['pre_outdoor_id']) ? $_POST['pre_outdoor_id'] : array();
+    $pre_outdoor_test = isset($_POST['pre_outdoor_test']) && is_array($_POST['pre_outdoor_test']) ? $_POST['pre_outdoor_test'] : array();
+    $pre_outdoor_text = isset($_POST['pre_outdoor_text']) && is_array($_POST['pre_outdoor_text']) ? $_POST['pre_outdoor_text'] : array();
 
      // insert indoor test
    //  $pre_in_con=count($pre_inhouse_id);
-   //  for ($i=0; $i <$pre_in_con ; $i++) 
+   //  for ($i=0; $i <$pre_in_con ; $i++)
    //  {
-     
-    
+
+
    //  $pre_in_data=Array("test_name"=>$pre_inhouse_test[$i],"result_value"=>$pre_inhouse_text[$i],"test_price"=>$pre_inhouse_price[$i]);
    //  $db->where('test_id',$pre_inhouse_id[$i]);
    //  $db->update('current_patient_test',$pre_in_data);
@@ -92,15 +93,18 @@ if(isset($_POST['save_recored']))
 
    //  }
 
-    $pre_out_con=count($pre_outdoor_id);
-    for ($i=0; $i <$pre_out_con ; $i++) 
-    {
-
-
-    $pre_out_data=Array("test_name"=>$pre_outdoor_test[$i],"result_value"=>$pre_outdoor_text[$i]);
-    $db->where('test_id',$pre_outdoor_id[$i]);
-    $db->update('current_patient_outdoor_test',$pre_out_data);
-
+    // Only process outdoor tests if data exists
+    if (!empty($pre_outdoor_id) && is_array($pre_outdoor_id)) {
+        $pre_out_con = count($pre_outdoor_id);
+        for ($i=0; $i < $pre_out_con; $i++)
+        {
+            // Additional safety checks for array indices
+            if (isset($pre_outdoor_id[$i]) && isset($pre_outdoor_test[$i]) && isset($pre_outdoor_text[$i])) {
+                $pre_out_data = Array("test_name"=>$pre_outdoor_test[$i],"result_value"=>$pre_outdoor_text[$i]);
+                $db->where('test_id',$pre_outdoor_id[$i]);
+                $db->update('current_patient_outdoor_test',$pre_out_data);
+            }
+        }
     }
 
 
@@ -108,12 +112,13 @@ if(isset($_POST['save_recored']))
     // $inhouse_text = $_POST['inhouse_text'];
     // $inhouse_price = $_POST['inhouse_price'];
 
-    $outdoor_test = $_POST['outdoor_test'];
-    $outdoor_text = $_POST['outdoor_text'];
+    // Check if outdoor test data exists and is an array before processing
+    $outdoor_test = isset($_POST['outdoor_test']) && is_array($_POST['outdoor_test']) ? $_POST['outdoor_test'] : array();
+    $outdoor_text = isset($_POST['outdoor_text']) && is_array($_POST['outdoor_text']) ? $_POST['outdoor_text'] : array();
 
     //  // insert indoor test
     // $cou_inhouse=count($inhouse);
-    // for ($i=0; $i <$cou_inhouse ; $i++) 
+    // for ($i=0; $i <$cou_inhouse ; $i++)
     // {
     // if ($inhouse[$i] != '' ) {
     //      push_inhouse_test($inhouse[$i],$db);
@@ -125,22 +130,22 @@ if(isset($_POST['save_recored']))
 
     // }
 
-    // insert out door test
-    $cou_outdoor=count($outdoor_test);
-    for ($i=0; $i <$cou_outdoor ; $i++) 
-    {
-    if ($outdoor_test[$i] != '') {
+    // insert out door test - only if data exists
+    if (!empty($outdoor_test) && is_array($outdoor_test)) {
+        $cou_outdoor = count($outdoor_test);
+        for ($i=0; $i < $cou_outdoor; $i++)
+        {
+            if (isset($outdoor_test[$i]) && $outdoor_test[$i] != '' && isset($outdoor_text[$i])) {
         
          push_outdoor_test($outdoor_test[$i],$db);
 
     $out_data=Array("p_id"=>$pat_id,"checkup_id"=>$checkup_id,"test_name"=>$outdoor_test[$i],"result_value"=>$outdoor_text[$i]);
      $db->insert('current_patient_outdoor_test',$out_data);
 
+            }
+        }
     }
 
-
-
-    }
     push_impression($impression,$db);
     push_hpi($hpi,$db);
     push_plan($pat_plan,$db);
@@ -1085,14 +1090,14 @@ if ('webkitSpeechRecognition' in window) {
            <button type="button" onclick="remove_pre_inhouse('<?php // echo $get_in['test_id'] ?>')" class="btn btn-danger btn-circle"><i class="fa fa-trash"></i></button>
         </div>
         <div class="col-md-4 setpad">
-        <input type="text" name="pre_inhouse_id[]" value="<?php// echo $get_in['test_id'] ?>" style="display:none;">
-        <input class="form-control setwid inhouse " name="pre_inhouse_test[]" id='inhouse' autocomplete="off" value="<?php// echo $get_in['test_name'] ?>" />
+        <input type="text" name="pre_inhouse_id[]" value="<?php // echo $get_in['test_id'] ?>" style="display:none;">
+        <input class="form-control setwid inhouse " name="pre_inhouse_test[]" id='inhouse' autocomplete="off" value="<?php // echo $get_in['test_name'] ?>" />
         </div>
          <div class="col-md-4 setpad">
-        <input class="form-control setwid " name="pre_inhouse_text[]" id='inhouse_text' autocomplete="off" value="<?php// echo $get_in['result_value'] ?>" />
+        <input class="form-control setwid " name="pre_inhouse_text[]" id='inhouse_text' autocomplete="off" value="<?php // echo $get_in['result_value'] ?>" />
         </div>
         <div class="col-md-2 setpad">
-        <input class="form-control setwid " name="pre_inhouse_price[]" id='inhouse_price' autocomplete="off" value="<?php// echo $get_in['test_price'] ?>" />
+        <input class="form-control setwid " name="pre_inhouse_price[]" id='inhouse_price' autocomplete="off" value="<?php // echo $get_in['test_price'] ?>" />
         </div>
         
          
