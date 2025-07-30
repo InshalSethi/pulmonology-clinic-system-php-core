@@ -82,16 +82,17 @@ if(isset($_POST['save_recored']))
     // $pre_inhouse_text = $_POST['pre_inhouse_text'];
     // $pre_inhouse_price = $_POST['pre_inhouse_price'];
     
-    $pre_outdoor_id = $_POST['pre_outdoor_id'];
-    $pre_outdoor_test = $_POST['pre_outdoor_test'];
-    $pre_outdoor_text = $_POST['pre_outdoor_text'];
+    // Check if outdoor test data exists in POST before processing
+    $pre_outdoor_id = isset($_POST['pre_outdoor_id']) ? $_POST['pre_outdoor_id'] : array();
+    $pre_outdoor_test = isset($_POST['pre_outdoor_test']) ? $_POST['pre_outdoor_test'] : array();
+    $pre_outdoor_text = isset($_POST['pre_outdoor_text']) ? $_POST['pre_outdoor_text'] : array();
 
      // insert indoor test
    //  $pre_in_con=count($pre_inhouse_id);
-   //  for ($i=0; $i <$pre_in_con ; $i++) 
+   //  for ($i=0; $i <$pre_in_con ; $i++)
    //  {
-     
-    
+
+
    //  $pre_in_data=Array("test_name"=>$pre_inhouse_test[$i],"result_value"=>$pre_inhouse_text[$i],"test_price"=>$pre_inhouse_price[$i]);
    //  $db->where('test_id',$pre_inhouse_id[$i]);
    //  $db->update('current_patient_test',$pre_in_data);
@@ -99,15 +100,18 @@ if(isset($_POST['save_recored']))
 
    //  }
 
-    $pre_out_con=count($pre_outdoor_id);
-    for ($i=0; $i <$pre_out_con ; $i++) 
-    {
-
-
-    $pre_out_data=Array("test_name"=>$pre_outdoor_test[$i],"result_value"=>$pre_outdoor_text[$i]);
-    $db->where('test_id',$pre_outdoor_id[$i]);
-    $db->update('current_patient_outdoor_test',$pre_out_data);
-
+    // Only process outdoor tests if data exists
+    if (is_array($pre_outdoor_id) && count($pre_outdoor_id) > 0) {
+        $pre_out_con = count($pre_outdoor_id);
+        for ($i=0; $i <$pre_out_con ; $i++)
+        {
+            // Ensure all required data exists for this iteration
+            if (isset($pre_outdoor_test[$i]) && isset($pre_outdoor_text[$i])) {
+                $pre_out_data=Array("test_name"=>$pre_outdoor_test[$i],"result_value"=>$pre_outdoor_text[$i]);
+                $db->where('test_id',$pre_outdoor_id[$i]);
+                $db->update('current_patient_outdoor_test',$pre_out_data);
+            }
+        }
     }
 
 
@@ -115,12 +119,13 @@ if(isset($_POST['save_recored']))
     // $inhouse_text = $_POST['inhouse_text'];
     // $inhouse_price = $_POST['inhouse_price'];
 
-    $outdoor_test = $_POST['outdoor_test'];
-    $outdoor_text = $_POST['outdoor_text'];
+    // Check if outdoor test data exists in POST before processing
+    $outdoor_test = isset($_POST['outdoor_test']) ? $_POST['outdoor_test'] : array();
+    $outdoor_text = isset($_POST['outdoor_text']) ? $_POST['outdoor_text'] : array();
 
      // insert indoor test
     // $cou_inhouse=count($inhouse);
-    // for ($i=0; $i <$cou_inhouse ; $i++) 
+    // for ($i=0; $i <$cou_inhouse ; $i++)
     // {
     // if ($inhouse[$i] != '' ) {
     //      push_inhouse_test($inhouse[$i],$db);
@@ -132,23 +137,25 @@ if(isset($_POST['save_recored']))
 
     // }
 
-    // insert out door test
-    $cou_outdoor=count($outdoor_test);
-    for ($i=0; $i <$cou_outdoor ; $i++) 
+    // insert out door test - only if data exists
+    if (is_array($outdoor_test) && count($outdoor_test) > 0) {
+        $cou_outdoor = count($outdoor_test);
+    for ($i=0; $i <$cou_outdoor ; $i++)
     {
-    if ($outdoor_test[$i] != '') {
-        
-         push_outdoor_test($outdoor_test[$i],$db);
+        // Ensure array indices exist before accessing them
+        if (isset($outdoor_test[$i]) && isset($outdoor_text[$i]) && $outdoor_test[$i] != '') {
 
-    $out_data=Array("p_id"=>$pat_id,"checkup_id"=>$checkup_id,"test_name"=>$outdoor_test[$i],"result_value"=>$outdoor_text[$i]);
-     $db->insert('current_patient_outdoor_test',$out_data);
+             push_outdoor_test($outdoor_test[$i],$db);
 
+        $out_data=Array("p_id"=>$pat_id,"checkup_id"=>$checkup_id,"test_name"=>$outdoor_test[$i],"result_value"=>$outdoor_text[$i]);
+         $db->insert('current_patient_outdoor_test',$out_data);
+
+        }
     }
 
 
 
-    }
-
+    } // Close the if statement for outdoor test processing
 
     push_impression($impression,$db);
     push_hpi($hpi,$db);
@@ -159,17 +166,7 @@ if(isset($_POST['save_recored']))
     $x=encode($pat_id);
     $y=encode($checkup_id);
     header("LOCATION:precept1.php?pd=$x&cd=$y");
-
-
-
-
-
-
-    
-   
-
-       
-    }
+}
   
 ?>
 <!DOCTYPE html>

@@ -78,6 +78,10 @@ $a= new crud();
                     <h4 class="fnt-info-set"><?php echo $checkup['checkup_date']; ?></h4>
                 </td>
                 <td class="st-width no-paddig">
+                    <h4 class="set-top-fnts">MR:</h4>
+                    <h4 class="fnt-info-set"><?php echo $pat_id; ?></h4> 
+                </td>
+                <td class="st-width no-paddig">
                     <h4 class="set-top-fnts">Name:</h4>
                     <h4 class="fnt-info-set"><?php echo $patient['p_name']; ?></h4> 
                 </td>
@@ -200,6 +204,10 @@ $a= new crud();
                                                         <td class="no-paddig">
                                                             <h4 class="set-top-fnts" >Diagnosis:</h4>
                             <h4 class="fnt-info-set"><?php echo $checkup['impression']; ?></h4>
+                                                        </td>
+                                                        <td class="no-paddig">
+                                                            <h4 class="set-top-fnts" >VCO:</h4>
+                                                            <h4 class="fnt-info-set"></h4>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -529,7 +537,9 @@ $a= new crud();
                       foreach( $fr_id as $fi ){
                       $db->where('id_for',$fi);
                       $parh=$db->getOne('forbearance_tbl');
-                      echo $parh['bear_desc'];
+                      if($parh && isset($parh['bear_desc'])){
+                          echo $parh['bear_desc'];
+                      }
                       }
                         ?>
                         </div>
