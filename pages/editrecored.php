@@ -15,6 +15,7 @@ if(isset($_POST['save_recored']))
 
     ///////////////// Patient info /////////// 
     $name = $_POST['name'];
+    $vco = $_POST['vco'];
     $sr_name = $_POST['sr_name'];
     
     $smoke = $_POST['his_smoke'];
@@ -67,7 +68,7 @@ if(isset($_POST['save_recored']))
     $pat_pro=$_POST['pro_pat'];
     $charity=$_POST['charity'];
     $pat_plan=$_POST['pat_plan'];
-    $up_chk = Array('pt_proc'=>$pat_pro,'charity'=>$charity,'hpi'=>$hpi,'impression'=>$impression,"rec_fee"=> $dr_fee,"examination"=>$exam,'pat_plan'=>$pat_plan);
+    $up_chk = Array('pt_proc'=>$pat_pro,'charity'=>$charity,'hpi'=>$hpi,'impression'=>$impression,"rec_fee"=> $dr_fee,"examination"=>$exam,'pat_plan'=>$pat_plan,'vco'=>$vco);
     
    
 
@@ -337,6 +338,15 @@ $(document).ready(function() {
     <div class="form-group">
     <label>Patient name</label>
     <input class="form-control" type="text" name="name" value="<?php echo $patient['p_name'] ?>" placeholder="">
+
+    </div>
+    <div class="form-group">
+    <label>VCO</label>
+    <select class="form-control" name="vco" required>
+        <option value="">-- Select VCO--</option>
+        <option value="YES" <?php echo ($checkup['vco'] == 'YES') ? 'selected' : ''; ?>>YES</option>
+        <option value="NO" <?php echo ($checkup['vco'] == 'NO') ? 'selected' : ''; ?>>NO</option>
+    </select>
 
     </div>
     <div class="form-group hidden">

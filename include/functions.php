@@ -468,36 +468,46 @@ function sanitize_text_input($str){
 //////////////////////////////////////////////////////////////////
 
 function get_stamp_id($stamp_string,$db){
-    
+
      $stampp =explode(",",$stamp_string);
-         foreach ($stampp  as $st) 
-        {  
+     $final = array(); // Initialize the array
+         foreach ($stampp  as $st)
+        {
          $db->where('st_name',$st);
          $stm_id=$db->getOne('stamps');
-         $final[] =$stm_id['st_id'];
-         $final_text =implode(",", $final);
-         
-        
+
+         // Check if $stm_id is not null and has the required key
+         if ($stm_id && isset($stm_id['st_id'])) {
+             $final[] =$stm_id['st_id'];
+         }
         }
-        
+
+        // Only implode if we have values
+        $final_text = !empty($final) ? implode(",", $final) : '';
+
         return $final_text;
 }
 //////////////////////////////////////////////////////////////////
 
 function get_forbear_id($forbear_string,$db){
-    
+
      $forbear =explode(",",$forbear_string);
-         foreach ($forbear  as $fb) 
-        {  
-           
+     $final = array(); // Initialize the array
+         foreach ($forbear  as $fb)
+        {
+
          $db->where('bear_title',$fb);
          $fb_id=$db->getOne('forbearance_tbl');
-         $final[] =$fb_id['id_for'];
-         $final_ids =implode(",", $final);
-         
-        
+
+         // Check if $fb_id is not null and has the required key
+         if ($fb_id && isset($fb_id['id_for'])) {
+             $final[] =$fb_id['id_for'];
+         }
         }
-        
+
+        // Only implode if we have values
+        $final_ids = !empty($final) ? implode(",", $final) : '';
+
         return $final_ids;
 }
 

@@ -108,7 +108,13 @@ $a= new crud();
                     <h4 class="set-top-fnts">Weight:</h4>
                     <h4 class="fnt-info-set"><?php echo $patient['p_weight']; ?> KG</h4>
                     </td>
-                    <?php } ?>
+                    
+                    <?php }if($checkup['vco']!=''){ ?>
+                    <td class="no-paddig">
+                        <h4 class="set-top-fnts" >VCO:</h4>
+                        <h4 class="fnt-info-set"><?php echo $checkup['vco']; ?></h4>
+                    </td>
+                    <?php }?>
                 </tr>
 
                                           
@@ -204,10 +210,6 @@ $a= new crud();
                                                         <td class="no-paddig">
                                                             <h4 class="set-top-fnts" >Diagnosis:</h4>
                             <h4 class="fnt-info-set"><?php echo $checkup['impression']; ?></h4>
-                                                        </td>
-                                                        <td class="no-paddig">
-                                                            <h4 class="set-top-fnts" >VCO:</h4>
-                                                            <h4 class="fnt-info-set"></h4>
                                                         </td>
                                                     </tr>
                                                 </tbody>
